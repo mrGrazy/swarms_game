@@ -1,5 +1,5 @@
 import pygame.draw
-from pygame.math import Vector2
+from vector2d import Vec2d
 
 class Hunter:
   
