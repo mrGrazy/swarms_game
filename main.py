@@ -1,6 +1,7 @@
 import os, sys
 import pygame
 from pygame.locals import *
+from world import *
 
 pygame.init()
 screen = pygame.display.set_mode((640, 480))
@@ -17,9 +18,18 @@ if pygame.font:
   textpos = text.get_rect(centerx=background.get_width()/2)
   background.blit(text, textpos)
 
+world = World()
+clock = pygame.time.Clock()
+
 quit = False
 
 while not quit:
+  clock.tick()
+
+  world.update(clock.get_time())
+
+  world.draw(background)
+
   screen.blit(background, (0,0))
   pygame.display.flip()
 
