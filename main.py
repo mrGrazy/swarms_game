@@ -11,22 +11,13 @@ print(pygame.version.ver)
 pygame.init()
 width = 640
 height = 480
-screen = pygame.display.set_mode((width, height), 0, 32)
+screen = pygame.display.set_mode((width, height),pygame.HWSURFACE,32)
+print(pygame.display.Info())
 pygame.display.set_caption('Swarms')
 pygame.mouse.set_visible(1)
 
 pixels = pygame.surfarray.pixels2d(screen)
 cairo_surface = cairo.ImageSurface.create_for_data(pixels.data, cairo.FORMAT_RGB24, width, height)
-
-#background = pygame.Surface(screen.get_size())
-#background = background.convert()
-#background.fill((255, 255, 255))
-
-# if pygame.font:
-#   font = pygame.font.Font(None, 36)
-#   text = font.render("Hello, World", 1, (10, 10, 10))
-#   #textpos = text.get_rect(centerx=background.get_width()/2)
-#   #background.blit(text, textpos)
 
 context = cairo.Context(cairo_surface)
 
