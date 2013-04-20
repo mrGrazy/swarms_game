@@ -1,6 +1,7 @@
 import os, sys
 import pygame
 from pygame.locals import *
+from player import Player
 
 pygame.init()
 screen = pygame.display.set_mode((640, 480))
@@ -17,9 +18,14 @@ if pygame.font:
   textpos = text.get_rect(centerx=background.get_width()/2)
   background.blit(text, textpos)
 
+player = Player()
+
 quit = False
 
 while not quit:
+
+  player.draw(background)
+
   screen.blit(background, (0,0))
   pygame.display.flip()
 
