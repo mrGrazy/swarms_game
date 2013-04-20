@@ -5,11 +5,11 @@ from pygame.locals import *
 pygame.init()
 screen = pygame.display.set_mode((640, 480))
 pygame.display.set_caption('Swarms')
-pygame.mouse.set_visible(0)
+pygame.mouse.set_visible(1)
 
 background = pygame.Surface(screen.get_size())
 background = background.convert()
-background.fill((250, 250, 250))
+background.fill((255, 255, 255))
 
 if pygame.font:
   font = pygame.font.Font(None, 36)
@@ -20,6 +20,8 @@ if pygame.font:
 quit = False
 
 while not quit:
+  screen.blit(background, (0,0))
+  pygame.display.flip()
 
   for event in pygame.event.get():
     if event.type == QUIT:
