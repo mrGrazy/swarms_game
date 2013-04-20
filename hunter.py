@@ -13,8 +13,8 @@ class Hunter:
   def update(self, delta_time):
     #self.facing += 0.1*delta_time
     self.velo = Vec2d(1,1)
-    #self.velo.length = self.speed * delta_time
-    #self.velo.angle = math.degrees(self.facing)
+    self.velo.length = self.speed * delta_time
+    self.velo.angle = self.facing
     self.pos = self.pos + self.velo
     pass
 
