@@ -2,7 +2,7 @@
 import operator
 import math
  
-class vec2d(object):
+class Vec2d(object):
   """2d vector class, supports vector and scalar operators,
      and also provides a bunch of high level functions
      """
@@ -25,7 +25,7 @@ class vec2d(object):
     elif key == 1:
       return self.y
     else:
-      raise IndexError("Invalid subscript "+str(key)+" to vec2d")
+      raise IndexError("Invalid subscript "+str(key)+" to Vec2d")
  
   def __setitem__(self, key, value):
     if key == 0:
@@ -33,11 +33,11 @@ class vec2d(object):
     elif key == 1:
       self.y = value
     else:
-      raise IndexError("Invalid subscript "+str(key)+" to vec2d")
+      raise IndexError("Invalid subscript "+str(key)+" to Vec2d")
  
   # String representaion (for debugging)
   def __repr__(self):
-    return 'vec2d(%s, %s)' % (self.x, self.y)
+    return 'Vec2d(%s, %s)' % (self.x, self.y)
   
   # Comparison
   def __eq__(self, other):
@@ -57,24 +57,24 @@ class vec2d(object):
  
   # Generic operator handlers
   def _o2(self, other, f):
-    "Any two-operator operation where the left operand is a vec2d"
-    if isinstance(other, vec2d):
-      return vec2d(f(self.x, other.x),
+    "Any two-operator operation where the left operand is a Vec2d"
+    if isinstance(other, Vec2d):
+      return Vec2d(f(self.x, other.x),
              f(self.y, other.y))
     elif (hasattr(other, "__getitem__")):
-      return vec2d(f(self.x, other[0]),
+      return Vec2d(f(self.x, other[0]),
              f(self.y, other[1]))
     else:
-      return vec2d(f(self.x, other),
+      return Vec2d(f(self.x, other),
              f(self.y, other))
  
   def _r_o2(self, other, f):
-    "Any two-operator operation where the right operand is a vec2d"
+    "Any two-operator operation where the right operand is a Vec2d"
     if (hasattr(other, "__getitem__")):
-      return vec2d(f(other[0], self.x),
+      return Vec2d(f(other[0], self.x),
              f(other[1], self.y))
     else:
-      return vec2d(f(other, self.x),
+      return Vec2d(f(other, self.x),
              f(other, self.y))
  
   def _io(self, other, f):
@@ -89,16 +89,16 @@ class vec2d(object):
  
   # Addition
   def __add__(self, other):
-    if isinstance(other, vec2d):
-      return vec2d(self.x + other.x, self.y + other.y)
+    if isinstance(other, Vec2d):
+      return Vec2d(self.x + other.x, self.y + other.y)
     elif hasattr(other, "__getitem__"):
-      return vec2d(self.x + other[0], self.y + other[1])
+      return Vec2d(self.x + other[0], self.y + other[1])
     else:
-      return vec2d(self.x + other, self.y + other)
+      return Vec2d(self.x + other, self.y + other)
   __radd__ = __add__
   
   def __iadd__(self, other):
-    if isinstance(other, vec2d):
+    if isinstance(other, Vec2d):
       self.x += other.x
       self.y += other.y
     elif hasattr(other, "__getitem__"):
@@ -111,21 +111,21 @@ class vec2d(object):
  
   # Subtraction
   def __sub__(self, other):
-    if isinstance(other, vec2d):
-      return vec2d(self.x - other.x, self.y - other.y)
+    if isinstance(other, Vec2d):
+      return Vec2d(self.x - other.x, self.y - other.y)
     elif (hasattr(other, "__getitem__")):
-      return vec2d(self.x - other[0], self.y - other[1])
+      return Vec2d(self.x - other[0], self.y - other[1])
     else:
-      return vec2d(self.x - other, self.y - other)
+      return Vec2d(self.x - other, self.y - other)
   def __rsub__(self, other):
-    if isinstance(other, vec2d):
-      return vec2d(other.x - self.x, other.y - self.y)
+    if isinstance(other, Vec2d):
+      return Vec2d(other.x - self.x, other.y - self.y)
     if (hasattr(other, "__getitem__")):
-      return vec2d(other[0] - self.x, other[1] - self.y)
+      return Vec2d(other[0] - self.x, other[1] - self.y)
     else:
-      return vec2d(other - self.x, other - self.y)
+      return Vec2d(other - self.x, other - self.y)
   def __isub__(self, other):
-    if isinstance(other, vec2d):
+    if isinstance(other, Vec2d):
       self.x -= other.x
       self.y -= other.y
     elif (hasattr(other, "__getitem__")):
@@ -138,16 +138,16 @@ class vec2d(object):
  
   # Multiplication
   def __mul__(self, other):
-    if isinstance(other, vec2d):
-      return vec2d(self.x*other.x, self.y*other.y)
+    if isinstance(other, Vec2d):
+      return Vec2d(self.x*other.x, self.y*other.y)
     if (hasattr(other, "__getitem__")):
-      return vec2d(self.x*other[0], self.y*other[1])
+      return Vec2d(self.x*other[0], self.y*other[1])
     else:
-      return vec2d(self.x*other, self.y*other)
+      return Vec2d(self.x*other, self.y*other)
   __rmul__ = __mul__
   
   def __imul__(self, other):
-    if isinstance(other, vec2d):
+    if isinstance(other, Vec2d):
       self.x *= other.x
       self.y *= other.y
     elif (hasattr(other, "__getitem__")):
@@ -222,16 +222,16 @@ class vec2d(object):
  
   # Unary operations
   def __neg__(self):
-    return vec2d(operator.neg(self.x), operator.neg(self.y))
+    return Vec2d(operator.neg(self.x), operator.neg(self.y))
  
   def __pos__(self):
-    return vec2d(operator.pos(self.x), operator.pos(self.y))
+    return Vec2d(operator.pos(self.x), operator.pos(self.y))
  
   def __abs__(self):
-    return vec2d(abs(self.x), abs(self.y))
+    return Vec2d(abs(self.x), abs(self.y))
  
   def __invert__(self):
-    return vec2d(-self.x, -self.y)
+    return Vec2d(-self.x, -self.y)
  
   # vectory functions
  
@@ -262,7 +262,7 @@ class vec2d(object):
     length = self.length
     if length != 0:
       return self/length
-    return vec2d(self)
+    return Vec2d(self)
  
   def normalize_return_length(self):
     length = self.length
@@ -272,13 +272,13 @@ class vec2d(object):
     return length
  
   def perpendicular(self):
-    return vec2d(-self.y, self.x)
+    return Vec2d(-self.y, self.x)
   
   def perpendicular_normal(self):
     length = self.length
     if length != 0:
-      return vec2d(-self.y/length, self.x/length)
-    return vec2d(self)
+      return Vec2d(-self.y/length, self.x/length)
+    return Vec2d(self)
     
   def dot(self, other):
     return float(self.x*other[0] + self.y*other[1])
