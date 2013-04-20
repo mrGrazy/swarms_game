@@ -11,5 +11,8 @@ class World:
       obj.update(delta_time)
 
   def draw(self, canvas):
+    canvas.set_source_rgb(1, 1, 1)
+    canvas.paint()
+
     for obj in self.objects:
       obj.draw(canvas)

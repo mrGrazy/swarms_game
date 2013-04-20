@@ -2,21 +2,32 @@ import os, sys
 import pygame
 from pygame.locals import *
 from world import *
+#import numpy
+import cairo
+import math
 
 pygame.init()
-screen = pygame.display.set_mode((640, 480))
+width = 640
+height = 480
+screen = pygame.display.set_mode((width, height), 0, 32)
 pygame.display.set_caption('Swarms')
 pygame.mouse.set_visible(1)
 
-background = pygame.Surface(screen.get_size())
-background = background.convert()
-background.fill((255, 255, 255))
+pixels = pygame.surfarray.pixels2d(screen)
+cairo_surface = cairo.ImageSurface.create_for_data(pixels.data, cairo.FORMAT_RGB24, width, height)
 
-if pygame.font:
-  font = pygame.font.Font(None, 36)
-  text = font.render("Hello, World", 1, (10, 10, 10))
-  textpos = text.get_rect(centerx=background.get_width()/2)
-  background.blit(text, textpos)
+#background = pygame.Surface(screen.get_size())
+#background = background.convert()
+#background.fill((255, 255, 255))
+
+# if pygame.font:
+#   font = pygame.font.Font(None, 36)
+#   text = font.render("Hello, World", 1, (10, 10, 10))
+#   #textpos = text.get_rect(centerx=background.get_width()/2)
+#   #background.blit(text, textpos)
+
+context = cairo.Context(cairo_surface)
+
 
 world = World()
 clock = pygame.time.Clock()
@@ -28,9 +39,10 @@ while not quit:
 
   world.update(clock.get_time())
 
-  world.draw(background)
+  context = cairo.Context(cairo_surface)
+  context.translate(width/2, height/2)
+  world.draw(context)
 
-  screen.blit(background, (0,0))
   pygame.display.flip()
 
   for event in pygame.event.get():
@@ -42,3 +54,5 @@ while not quit:
     #elif event.type == MOUSEBUTTONDOWN:
     #elif event.type == MOUSEBUTTONUP:
 
+del pixels
+del cairo_surface
