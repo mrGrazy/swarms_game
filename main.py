@@ -39,7 +39,7 @@ quit = False
 while not quit:
   clock.tick()
 
-  world.update(clock.get_time())
+  world.update(clock.get_time() / 1000.0)
 
   context = cairo.Context(cairo_surface)
   context.translate(width/2, height/2)

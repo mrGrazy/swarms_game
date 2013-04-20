@@ -17,4 +17,6 @@ class World:
     canvas.paint()
 
     for obj in self.objects:
+      mtx = canvas.get_matrix()
       obj.draw(canvas)
+      canvas.set_matrix(mtx)
