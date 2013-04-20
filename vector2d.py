@@ -245,8 +245,7 @@ class Vec2d(object):
         self.y *= value/length
     length = property(get_length, __setlength, None, "gets or sets the magnitude of the vector")
  
-    def rotate(self, angle_degrees):
-        radians = math.radians(angle_degrees)
+    def rotate(self, radians):
         cos = math.cos(radians)
         sin = math.sin(radians)
         x = self.x*cos - self.y*sin
@@ -254,8 +253,7 @@ class Vec2d(object):
         self.x = x
         self.y = y
  
-    def rotated(self, angle_degrees):
-        radians = math.radians(angle_degrees)
+    def rotated(self, radians):
         cos = math.cos(radians)
         sin = math.sin(radians)
         x = self.x*cos - self.y*sin
@@ -265,17 +263,17 @@ class Vec2d(object):
     def get_angle(self):
         if (self.get_length_sqrd() == 0):
             return 0
-        return math.degrees(math.atan2(self.y, self.x))
-    def __setangle(self, angle_degrees):
+        return math.atan2(self.y, self.x)
+    def __setangle(self, radians):
         self.x = self.length
         self.y = 0
-        self.rotate(angle_degrees)
+        self.rotate(radians)
     angle = property(get_angle, __setangle, None, "gets or sets the angle of a vector")
  
     def get_angle_between(self, other):
         cross = self.x*other[1] - self.y*other[0]
         dot = self.x*other[0] + self.y*other[1]
-        return math.degrees(math.atan2(cross, dot))
+        return math.atan2(cross, dot)
  
     def normalized(self):
         length = self.length
@@ -389,18 +387,18 @@ if __name__ == "__main__":
  
         def testAngles(self):
             v = Vec2d(0, 3)
-            self.assertEquals(v.angle, 90)
+            self.assertEquals(v.angle, math.pi / 2) # was 90 deg
             v2 = Vec2d(v)
-            v.rotate(-90)
-            self.assertEqual(v.get_angle_between(v2), 90)
-            v2.angle -= 90
+            v.rotate(math.pi / -2) #was -90 deg
+            self.assertEqual(v.get_angle_between(v2), math.pi / 2) # was 90 deg
+            v2.angle -= math.pi / 2
             self.assertEqual(v.length, v2.length)
             self.assertEquals(v2.angle, 0)
             self.assertEqual(v2, [3, 0])
             self.assert_((v - v2).length < .00001)
             self.assertEqual(v.length, v2.length)
-            v2.rotate(300)
-            self.assertAlmostEquals(v.get_angle_between(v2), -60)
+            v2.rotate(math.pi * 5 / 3) # was 300 deg
+            self.assertAlmostEquals(v.get_angle_between(v2), math.pi / -3) #was -60 deg
             v2.rotate(v2.get_angle_between(v))
             angle = v.get_angle_between(v2)
             self.assertAlmostEquals(v.get_angle_between(v2), 0)

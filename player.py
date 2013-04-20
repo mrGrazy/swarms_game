@@ -14,15 +14,15 @@ class Player:
   def update(self, dt):
     if key.get_pressed(key.K_UP):
       self.velocity.length = 1
-    elif key.get_pressed(K_DOWN):
+    elif key.get_pressed(key.K_DOWN):
       self.velocity.length = -1
     else:
       self.velocity *= 0
 
-    if key.get_pressed(K_LEFT):
-      self.velocity.rotate_ip(0.15)
-    elif key.get_pressed(K_RIGHT):
-      self.velocity.rotate_ip(-0.15)
+    if key.get_pressed(key.K_LEFT):
+      self.velocity.rotate_ip(15)
+    elif key.get_pressed(key.K_RIGHT):
+      self.velocity.rotate_ip(-15)
 
     self.position = self.velocity
 
