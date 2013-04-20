@@ -1,9 +1,11 @@
+#from player import Player
 from hunter import *
 
 class World:
 
   def __init__(self):
     self.objects = []
+    #self.objects.append(Player())
     self.objects.append(Hunter())
 
   def update(self, delta_time):

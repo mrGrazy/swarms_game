@@ -6,6 +6,8 @@ from world import *
 import cairo
 import math
 
+print(pygame.version.ver)
+
 pygame.init()
 width = 640
 height = 480
