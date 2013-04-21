@@ -25,11 +25,6 @@ class Hunter:
     surface.line_to(-10,5)
     surface.line_to(-10,-5)
     surface.line_to(10,0)
-    surface.set_source_rgb(0, 0, 255)
+    surface.set_source_rgb(255, 0, 0)
     surface.stroke()
-
-    surface.select_font_face("Courier");
-
-    surface.set_font_size(60);
-
-   # surface.show_text(str(self.velo.length))
+    
