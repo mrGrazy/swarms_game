@@ -1,11 +1,11 @@
-#from player import Player
+from player import Player
 from hunter import *
 
 class World:
 
   def __init__(self):
     self.objects = []
-    #self.objects.append(Player())
+    self.objects.append(Player())
     for i in range(100):
       self.objects.append(Hunter())
     
