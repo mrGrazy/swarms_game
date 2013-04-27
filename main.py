@@ -30,7 +30,12 @@ cairo_surface = cairo.ImageSurface.create_for_data(pixels, cairo.FORMAT_RGB24, w
 context = cairo.Context(cairo_surface)
 
 
-world = World()
+w_rect = Rect(screen.get_rect())
+w_rect.x -= w_rect.width/2
+w_rect.y -= w_rect.height/2
+
+
+world = World(w_rect)
 clock = pygame.time.Clock()
 
 quit = False
