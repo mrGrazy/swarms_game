@@ -1,6 +1,6 @@
 from player import Player
 from hunter import *
-#from quadtree import QuadTree, draw_qtree
+from quadtree import QuadTree, draw_qtree
 from collision import update_collisions
 
 class World:
